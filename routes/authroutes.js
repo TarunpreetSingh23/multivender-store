@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import crypto from "crypto";
 import PasswordResetOtp from "../model/PasswordResetOtp.js";
-import { sendOtpEmail } from "../emailService.js";
+import sendOtpEmail from "../emailService.js";
 
 import authMiddleware from "../middleware/authMiddleware.js";
 import roleMiddleware from "../middleware/roleMiddleware.js";
@@ -279,6 +279,7 @@ const hashOtp = (otp, email) => {
 router.post("/forgot-password", async (req, res) => {
   try {
     const { email } = req.body;
+    console.log(email);
     if (!email || !email.trim()) {
       return res.status(400).json({
         success: false,
@@ -313,6 +314,7 @@ router.post("/forgot-password", async (req, res) => {
 
     // Look up user (Always return generic success to protect privacy)
     const user = await User.findOne({ email: normalizedEmail });
+    console.log(user);
 
     if (user) {
       // Generate cryptographically secure random 6-digit number
