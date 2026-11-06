@@ -18,7 +18,7 @@ export const sendOtpEmail = async ({ to, name, otp }) => {
     }
 
     const { data, error } = await resend.emails.send({
-      from: "MarketNest <onboarding@resend.dev>",
+      from: "tarunpreets29@gmail.com",
       to: [to],
       subject: "Your MarketNest Verification Code",
       html: `
